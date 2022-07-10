@@ -2,6 +2,7 @@ package pl.dawid.app.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.dawid.app.exception.InvalidStateException;
 import pl.dawid.app.exception.ResourceNotFoundException;
 import pl.dawid.app.exception.ValidationException;
 import pl.dawid.app.model.Training;
@@ -66,7 +67,10 @@ public class TrainingServiceImpl implements TrainingService{
     }
 
     @Override
-    public Double getAverageSpeed(Training training) {
-        throw new IllegalArgumentException("Not implemented yet!");
+    public Double getAverageSpeed(Training training) throws InvalidStateException {
+        if (training == null ) {
+            throw new  ResourceNotFoundException("Training not found");
+        }
+        return training.getAverageSpeed().orElseThrow(()->new InvalidStateException("Time can not be null or zero"));
     }
 }
