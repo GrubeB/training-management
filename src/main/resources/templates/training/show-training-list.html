@@ -31,6 +31,7 @@
                                 <th>Training time</th>
                                 <th>Travelled distance</th>
                                 <th>Burned Calories</th>
+                                <th>Average speed</th>
                                 <th>Comment</th>
                                 <th>Actions</th>
                             </tr>
@@ -42,6 +43,7 @@
                                     <td th:text="${#dates.format(training.trainingTime, 'HH:mm:ss')}"></td>
                                     <td th:text="${training.travelledDistance}"></td>
                                     <td th:text="${training.burnedCalories}"></td>
+                                    <td th:text="${#numbers.formatDecimal(training.averageSpeed,1,2,'COMMA')}"></td>
                                     <td th:text="${training.comment}"></td>
                                     <td>
                                         <a th:href="@{'/trainings/update/{id}'(id=${training.id})}" class="btn btn-info mb-2">Update</a>

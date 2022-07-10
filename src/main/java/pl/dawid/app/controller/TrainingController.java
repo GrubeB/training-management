@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import pl.dawid.app.dto.TrainingBaseDTO;
 import pl.dawid.app.dto.TrainingCreateDTO;
+import pl.dawid.app.dto.TrainingExtendedDTO;
 import pl.dawid.app.dto.TrainingUpdateDTO;
 import pl.dawid.app.exception.ValidationException;
 import pl.dawid.app.mapper.TrainingMapperImpl;
@@ -36,8 +37,8 @@ public class TrainingController {
     @GetMapping({"/trainings", "/trainings/show_list"})
     public ModelAndView showTrainingListTemplate() {
         ModelAndView modelAndView = new ModelAndView("training/show-training-list");
-        List<TrainingBaseDTO> trainingBaseDTOList = trainingMapper.mapEntityListToBaseDtoList(trainingService.fetchTrainingList());
-        modelAndView.addObject("training_list", trainingBaseDTOList);
+        List<TrainingExtendedDTO> trainingExtendedDTOList = trainingMapper.mapEntityListToExtendDtoList(trainingService.fetchTrainingList());
+        modelAndView.addObject("training_list", trainingExtendedDTOList);
         return modelAndView;
     }
 
