@@ -2,6 +2,7 @@ package pl.dawid.app.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.dawid.app.exception.ResourceNotFoundException;
 import pl.dawid.app.model.Training;
 import pl.dawid.app.repository.TrainingRepository;
 
@@ -16,7 +17,8 @@ public class TrainingServiceImpl implements TrainingService {
     @Override
     public Training fetchTrainingById(Long id) {
         return trainingRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Training not found with id: " + id));
+                .orElseThrow(()->new ResourceNotFoundException("Training not found with id: "+id));
+
     }
 
     @Override
@@ -32,7 +34,8 @@ public class TrainingServiceImpl implements TrainingService {
     @Override
     public Training updateTraining(Long id, Training training) {
         Training existingTraining = trainingRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Training not found with id: " + id));
+                .orElseThrow(()->new ResourceNotFoundException("Training not found with id: "+id));
+
         existingTraining.setTrainingDate(training.getTrainingDate());
         existingTraining.setTrainingTime(training.getTrainingTime());
         existingTraining.setTravelledDistance(training.getTravelledDistance());
@@ -45,7 +48,7 @@ public class TrainingServiceImpl implements TrainingService {
     @Override
     public void deleteTrainingById(Long id) {
         trainingRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Training not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Training not found with id: "+id));
         trainingRepository.deleteById(id);
     }
 
