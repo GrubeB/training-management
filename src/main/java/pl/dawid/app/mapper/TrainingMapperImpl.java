@@ -3,6 +3,7 @@ package pl.dawid.app.mapper;
 import org.springframework.stereotype.Component;
 import pl.dawid.app.dto.TrainingBaseDTO;
 import pl.dawid.app.dto.TrainingCreateDTO;
+import pl.dawid.app.dto.TrainingExtendedDTO;
 import pl.dawid.app.dto.TrainingUpdateDTO;
 import pl.dawid.app.model.Training;
 
@@ -46,6 +47,42 @@ public class TrainingMapperImpl implements TrainingMapper {
         }
         List<TrainingBaseDTO> dtoList = new ArrayList<>(entityList.size());
         entityList.stream().map(e -> mapEntityToBaseDto(e)).filter(Objects::nonNull).forEach(dtoList::add);
+        return dtoList;
+    }
+
+    public TrainingExtendedDTO mapEntityToExtendDto(Training entity) {
+        if (entity == null) {
+            return null;
+        }
+        TrainingExtendedDTO dto = new TrainingExtendedDTO();
+        if (entity.getId() != null) {
+            dto.setId(entity.getId());
+        }
+        if (entity.getTrainingDate() != null) {
+            dto.setTrainingDate(entity.getTrainingDate());
+        }
+        if (entity.getTrainingTime() != null) {
+            dto.setTrainingTime(entity.getTrainingTime());
+        }
+        if (entity.getTravelledDistance() != null) {
+            dto.setTravelledDistance(entity.getTravelledDistance());
+        }
+        if (entity.getBurnedCalories() != null) {
+            dto.setBurnedCalories(entity.getBurnedCalories());
+        }
+        if (entity.getComment() != null) {
+            dto.setComment(entity.getComment());
+        }
+        entity.getAverageSpeed().ifPresent(dto::setAverageSpeed);
+        return dto;
+    }
+
+    public List<TrainingExtendedDTO> mapEntityListToExtendDtoList(List<Training> entityList) {
+        if (entityList == null) {
+            return null;
+        }
+        List<TrainingExtendedDTO> dtoList = new ArrayList<>(entityList.size());
+        entityList.stream().map(e -> mapEntityToExtendDto(e)).filter(Objects::nonNull).forEach(dtoList::add);
         return dtoList;
     }
 
