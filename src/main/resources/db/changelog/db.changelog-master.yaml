@@ -1,0 +1,3 @@
+databaseChangeLog:
+  - include:
+      file: db/2022-07-10_add_training_model.yaml

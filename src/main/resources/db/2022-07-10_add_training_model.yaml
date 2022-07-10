@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: add_training_model
+      author: dawidb
+      changes:
+        - createTable:
+            tableName: tbl_training
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: training_date
+                  type: date
+              - column:
+                  name: training_time
+                  type: time
+              - column:
+                  name: travelled_distance
+                  type: double
+              - column:
+                  name: burned_calories
+                  type: int
+              - column:
+                  name: comment
+                  type: varchar(2000)
