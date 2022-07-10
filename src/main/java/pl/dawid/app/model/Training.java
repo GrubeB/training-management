@@ -18,7 +18,7 @@ import java.util.Optional;
 @AllArgsConstructor
 @SuperBuilder
 @Table(name = "tbl_training")
-public class Training extends IdentityModel{
+public class Training extends IdentityModel {
 
     @Column(name = "training_date", nullable = false)
     private Date trainingDate;
@@ -33,4 +33,12 @@ public class Training extends IdentityModel{
     private Integer burnedCalories;
 
     private String comment;
+
+    public Optional<Double> getAverageSpeed() {
+        if (trainingTime == null || trainingTime.equals(Time.valueOf(LocalTime.of(0, 0, 0, 0)))) {
+            return Optional.empty();
+        }
+        long milesSeconds = trainingTime.getTime() + (60 * 60 * 1000);
+        return Optional.of(travelledDistance / milesSeconds * (60 * 60 * 1000));
+    }
 }
