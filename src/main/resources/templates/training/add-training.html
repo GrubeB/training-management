@@ -1,0 +1,74 @@
+<!doctype html>
+<html xmlns="http://www.thymeleaf.org">
+    <head>
+        <link rel="stylesheet"
+              href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+              crossorigin="anonymous">
+        <meta charset="UTF-8">
+        <title>Add</title>
+    </head>
+    <body>
+        <div class="container h-100">
+            <div class="row align-items-center h-100">
+                <div class="col-6 mx-auto">
+                    <div class="jumbotron">
+
+                        <h2 class="text-center">Add training</h2>
+                        <hr/>
+                        <p th:text="${error}" class="text-danger"></p>
+                        <form th:action="@{'/trainings/add'}" th:object="${training}" method="POST">
+                            <div>
+                                <label for="trainingDate">Date of training</label>
+                                <input id="trainingDate"
+                                       type="date"
+                                       th:field="*{trainingDate}"
+                                       class="form-control col-4 mb-4"/>
+                            </div>
+                            <div>
+                                <label for="trainingTime">Time of training</label>
+                                <input id="trainingTime"
+                                       type="time"
+                                       th:field="*{trainingTime}"
+                                       class="form-control col-4 mb-4"
+                                       step="1"/>
+                            </div>
+                            <div>
+                                <label for="travelledDistance">Number of traveled distance</label>
+                                <input id="travelledDistance"
+                                       type="number"
+                                       th:field="*{travelledDistance}"
+                                       class="form-control col-4 mb-4"
+                                       placeholder="Enter distance"
+                                       step="0.001"/>
+                            </div>
+                            <div>
+                                <label for="burnedCalories">Burned calories</label>
+                                <input id="burnedCalories"
+                                       type="number"
+                                       th:field="*{burnedCalories}"
+                                       class="form-control col-4 mb-4"
+                                       placeholder="Enter calories"/>
+                            </div>
+                            <div>
+                                <label for="comment">Comment</label>
+                                <textarea id="comment" th:field="*{comment}"  class="form-control" rows="4" cols="30">
+                                </textarea>
+                            </div>
+
+                            <hr/>
+                            <div class="row mx-auto align-items-center">
+                                <div class="col-3 mx-auto text-center">
+                                    <button class="btn btn-success" type="submit">Save</button>
+
+                                </div>
+                            </div>
+                        </form>
+
+                        <a th:href="@{/trainings/show_list}">Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
