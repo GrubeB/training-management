@@ -17,6 +17,7 @@ import java.util.Optional;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
+@EqualsAndHashCode
 @Table(name = "tbl_training")
 public class Training extends IdentityModel {
 
